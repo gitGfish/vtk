@@ -7,14 +7,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 function App(){
   const [uiData, setUiData] = useState([{
-    i:50,
-    j:50,
-    k:50,
-    ic:true,
-    jc:true,
-    kc:true,
-    c:50,
-    cw:50
+    i:50, // I Slider inital value [0 - 100] 
+    j:50, // J Slider inital value [0 - 100] 
+    k:50, // k Slider inital value [0 - 100] 
+    ic:true, // I checkBox inital value [false,true]
+    jc:true, // J checkBox inital value [false,true]
+    kc:true, // K checkBox inital value [false,true]
+    c:50, // Color value inital value [0 - 100]
+    cw:50 // Color window value inital value [0 - 100]
   }]);
 
   const [vtiURL, setVtiURL] = useState("");
