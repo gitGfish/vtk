@@ -55,23 +55,6 @@ function Renderer(props){
         setRenderWindow(_renderWindow);
         setRenderer(_renderer);
 
-        //  const imageActorI = vtkImageSlice.newInstance();
-        //   const imageActorJ = vtkImageSlice.newInstance();
-        //   const imageActorK = vtkImageSlice.newInstance();
-        //   renderer.addActor(imageActorK);
-        //   renderer.addActor(imageActorJ);
-        //   renderer.addActor(imageActorI);
-        
-
-    
-    //   function updateIsoValue(e) {
-    //   const isoValue = Number(e.target.value);
-        
-    //   imageActorI.getProperty().setColorWindow(isoValue);
-    //   imageActorJ.getProperty().setColorWindow(isoValue);
-    //   imageActorK.getProperty().setColorWindow(isoValue);
-    //     renderWindow.render();
-    //    }
     
     const _reader = vtkHttpDataSetReader.newInstance({ fetchGzip: true });
     setReader(_reader);
