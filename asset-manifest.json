@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/vtk/static/js/main.2b15ac8d.js",
+    "index.html": "/vtk/index.html",
+    "main.2b15ac8d.js.map": "/vtk/static/js/main.2b15ac8d.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.2b15ac8d.js"
+  ]
+}
