@@ -11,6 +11,17 @@ import CardContent from '@mui/material/CardContent';
 
 import TextField from '@mui/material/TextField';
 
+/**
+ * The ButtonComponent is a React component responsible for rendering a card with UI controls
+ * for manipulating slices, color, and color window, as well as input for VTI URL.
+ *
+ * @param {Object} props - Component properties.
+ * @param {array} props.uiData - User interface data or configuration.
+ * @param {Function} props.setUiData - Function to set the user interface data.
+ * @param {string} props.setVtiURL - Function to set the VTI URL.
+ * @returns {JSX.Element} - Rendered component.
+ */
+
 function ButtonComponent(props) {
   
   const handleChangeI = (event, newValue) => {

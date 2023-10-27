@@ -26,6 +26,16 @@ import vtkInteractorStyleTrackballCamera from '@kitware/vtk.js/Interaction/Style
 
 import Slice from './Slice';
 
+/**
+ * The Renderer component is responsible for setting up a 3D rendering environment using VTK.js
+ * and loading and rendering VTK data.
+ *
+ * @param {Object} props - Component properties.
+ * @param {object} props.vti - VTK data object to display.
+ * @param {string} props.vtiURL - URL to fetch VTK data (optional).
+ * @param {object} props.uiData - User interface data or configuration (optional).
+ * @returns {JSX.Element} - Rendered component.
+ */
 
 function Renderer(props){
   const vtkContainerRef = useRef(null);
@@ -38,45 +48,31 @@ function Renderer(props){
 
   useEffect(() => {
     if (!context.current && props.vti ) {
+
+        // Setup renderer and openGL window
         const _renderWindow = vtkRenderWindow.newInstance();
         const _renderer = vtkRenderer.newInstance({ background: [0.2, 0.3, 0.4] });
         _renderWindow.addRenderer(_renderer);
 
         _renderer.resetCamera();
 
-        // ----------------------------------------------------------------------------
-        // Use OpenGL as the backend to view the all this
-        // ----------------------------------------------------------------------------
-
         const openGLRenderWindow = vtkOpenGLRenderWindow.newInstance();
         _renderWindow.addView(openGLRenderWindow);
 
-        // ----------------------------------------------------------------------------
-        // Create a div section to put this into
-        // ----------------------------------------------------------------------------
 
         const container = vtkWindow.current;
         openGLRenderWindow.setContainer(container);
 
-        // ----------------------------------------------------------------------------
-        // Capture size of the container and set it to the _renderWindow
-        // ----------------------------------------------------------------------------
 
         const { width, height } = container.getBoundingClientRect();
         openGLRenderWindow.setSize(width, height * 0.55);
 
-        // ----------------------------------------------------------------------------
-        // Setup an interactor to handle mouse events
-        // ----------------------------------------------------------------------------
 
         const interactor = vtkRenderWindowInteractor.newInstance();
         interactor.setView(openGLRenderWindow);
         interactor.initialize();
         interactor.bindEvents(container);
 
-        // ----------------------------------------------------------------------------
-        // Setup interactor style to use
-        // ----------------------------------------------------------------------------
 
         interactor.setInteractorStyle(vtkInteractorStyleTrackballCamera.newInstance());
         loadVti(_renderer,_renderWindow)
@@ -89,8 +85,15 @@ function Renderer(props){
     };
 }, [vtkContainerRef,props.vti]);
 
+/**
+ * Load VTK data using the vtkHttpDataSetReader and render it.
+ *
+ * @param {vtkRenderer} _renderer - The VTK renderer to render the data.
+ * @param {vtkRenderWindow} _renderWindow - The VTK render window to display the scene.
+ */
 
 function loadVti(_renderer,_renderWindow){
+    
     const _reader = vtkHttpDataSetReader.newInstance({ fetchGzip: true });
         setReader(_reader);
         _reader

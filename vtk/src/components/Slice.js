@@ -3,6 +3,18 @@ import { useState, useRef, useEffect } from 'react';
 import vtkImageMapper from '@kitware/vtk.js/Rendering/Core/ImageMapper';
 import vtkImageSlice from '@kitware/vtk.js/Rendering/Core/ImageSlice';
 
+/**
+ * The Slice component is responsible for displaying a cross-sectional slice of VTK data in the 3D rendering environment.
+ *
+ * @param {Object} props - Component properties.
+ * @param {vtkRenderWindow} props.renderWindow - The VTK render window for rendering.
+ * @param {vtkRenderer} props.renderer - The VTK renderer for rendering the slice.
+ * @param {vtkImageData} props.data - The VTK data to be sliced.
+ * @param {string} props.side - The orientation of the slice ('i', 'j', or 'k').
+ * @param {array} props.uiData - User interface data or configuration (optional).
+ * @returns {JSX.Element} - Rendered component.
+ */
+
 function Slice(props){
 
     const [dataRange, setDataRange] = useState([]);
@@ -55,6 +67,7 @@ function Slice(props){
     }, [props.renderWindow,props.data,props.renderer]);
 
     useEffect(() => {
+        // This useEffect handles changes in user interface data, which may affect the appearance of the slice.
         if(!props.renderWindow || props.uiData.length <= 0) return;
         if(!props.uiData[0][props.side + "c"]){
             props.renderer.removeActor(imageActor);
